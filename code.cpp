@@ -3,16 +3,37 @@
 using namespace std;
 int main()
 {
-    ll a;
-    cin>>a;
-    if(a%100==0&&a!=0)
+    string str;
+    cin>>str;
+    string smin=str;
+    string smax=str;
+    string temp="";
+    for(int i=0;i<str.length();i++)
     {
-        cout<<"Yes";
+        string st="";
+        for(int j=i;j<str.length();j++)
+        {
+            st+=str[j];
+        }
+        st+=temp;
+        temp+=str[i];
+        smin=min(smin,st);
+        smax=max(smax,st);
     }
-    else
+    temp="";
+    for(int i=str.length()-1;i>=0;i--)
     {
-        cout<<"No";
+        string st="";
+        for(int j=i;j>=0;j--)
+        {
+            st=str[j]+st;
+        }
+        st=temp+st;
+        temp=str[i]+temp;
+        smin=min(smin,st);
+        smax=max(smax,st);
     }
-    
+    cout<<smin<<endl;
+    cout<<smax;
     return 0;
 }
