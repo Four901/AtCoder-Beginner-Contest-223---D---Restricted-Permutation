@@ -1,24 +1,18 @@
-class Solution {
-public:
-    void okk(int index,int tempor,vector<int>&nums,int &ans,int &maxor)
+#include<bits/stdc++.h>
+#define ll long long 
+using namespace std;
+int main()
+{
+    ll a;
+    cin>>a;
+    if(a%100==0&&a!=0)
     {
-        if(index>=nums.size())
-        {
-            if(tempor==maxor)ans++;
-            return ;
-        }
-        okk(index+1,tempor,nums,ans,maxor);
-        okk(index+1,(tempor | nums[index]),nums,ans,maxor);
+        cout<<"Yes";
     }
-    int countMaxOrSubsets(vector<int>& nums)
+    else
     {
-     int maxor=0;
-     for(auto num:nums)
-     {
-         maxor=(maxor | num);
-     }
-       int ans=0;
-      okk(0,0,nums,ans,maxor);
-        return ans;
+        cout<<"No";
     }
-};
+    
+    return 0;
+}
