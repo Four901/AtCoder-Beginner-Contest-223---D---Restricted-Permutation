@@ -1,32 +1,27 @@
 class Solution {
 public:
-    bool winnerOfGame(string colors)
+    bool areNumbersAscending(string s)
     {
-        int a=0;
-        int b=0;
-        for(int i=0;i<colors.size();)
+        vector<int>nums;
+        for(int i=0;i<s.length();i++)
         {
-            char ch=colors[i];
-            int count=0;
-            while(i<colors.size())
+            string str="";
+            while(i<s.length())
             {
-                if(colors[i]!=ch)break;
+                if(s[i]==' ')break;
+                str+=s[i];
                 i++;
-                count++;
             }
-            if(count>=3)
+            if(str[0]>='1'&&str[0]<='9')
             {
-                if(ch=='A')
-                {
-                    
-                 a+=count-2;
-                }
-                else
-                {
-                    b+=count-2;
-                }
+                nums.push_back(stoi(str));
             }
         }
-        return a>b;
+        for(int i=0;i<nums.size()-1;i++)
+        {
+            cout<<nums[i]<<" ";
+            if(nums[i]>=nums[i+1])return false;
+        }
+        return true;
     }
 };
