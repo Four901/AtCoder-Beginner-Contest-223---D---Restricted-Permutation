@@ -1,39 +1,38 @@
 #include<bits/stdc++.h>
 #define ll long long 
+#define db double
 using namespace std;
 int main()
 {
-    string str;
-    cin>>str;
-    string smin=str;
-    string smax=str;
-    string temp="";
-    for(int i=0;i<str.length();i++)
+    vector<db>a,b;
+    ll n;
+    cin>>n;
+    db l,r;
+    db time=0.00;
+    for(int i=0;i<n;i++)
     {
-        string st="";
-        for(int j=i;j<str.length();j++)
-        {
-            st+=str[j];
-        }
-        st+=temp;
-        temp+=str[i];
-        smin=min(smin,st);
-        smax=max(smax,st);
+     cin>>l>>r;
+     time+=db(l/r);
+     a.push_back(l);
+     b.push_back(r);
     }
-    temp="";
-    for(int i=str.length()-1;i>=0;i--)
+    time=db(time/(db)2.0000000000);
+    db ans=0;
+     
+    for(int i=0;i<n;i++)
     {
-        string st="";
-        for(int j=i;j>=0;j--)
+       
+        if(db(a[i]/b[i])<=time)
         {
-            st=str[j]+st;
+            ans+=a[i];
+            time-=db(a[i]/b[i]);
         }
-        st=temp+st;
-        temp=str[i]+temp;
-        smin=min(smin,st);
-        smax=max(smax,st);
+        else
+        {
+            ans+=db(time*b[i]);
+            break;
+        }
     }
-    cout<<smin<<endl;
-    cout<<smax;
+    cout<<ans;
     return 0;
 }
