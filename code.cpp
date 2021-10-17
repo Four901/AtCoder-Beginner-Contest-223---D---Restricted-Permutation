@@ -4,35 +4,66 @@
 using namespace std;
 int main()
 {
-    vector<db>a,b;
-    ll n;
-    cin>>n;
-    db l,r;
-    db time=0.00;
-    for(int i=0;i<n;i++)
+    ll N,M;
+    cin>>N>>M;
+    vector<vector<ll> >graph(N);
+    ll l,r;
+    vector<ll>indeg(N,0);
+    while(M--)
     {
-     cin>>l>>r;
-     time+=db(l/r);
-     a.push_back(l);
-     b.push_back(r);
+        cin>>l>>r;
+        l--;
+        r--;
+        graph[l].push_back(r);
+        indeg[r]++;
     }
-    time=db(time/(db)2.0000000000);
-    db ans=0;
-     
-    for(int i=0;i<n;i++)
+    priority_queue<ll,vector<ll>,greater<ll> >q;
+    
+    for(ll i=0;i<N;i++)
     {
-       
-        if(db(a[i]/b[i])<=time)
+        if(indeg[i]==0)
         {
-            ans+=a[i];
-            time-=db(a[i]/b[i]);
-        }
-        else
-        {
-            ans+=db(time*b[i]);
-            break;
+            q.push(i);
         }
     }
-    cout<<ans;
+    
+    
+    
+    ll cnt = 0;
+    vector<ll> order;
+
+    
+    while (!q.empty()) {
+        
+        ll u = q.top();
+        q.pop();
+        order.push_back(u);
+ 
+        for(ll i=0;i<graph[u].size();i++)
+        {
+            
+            if(--indeg[graph[u][i]]==0)
+            {
+                
+                q.push(graph[u][i]);
+            }
+        }
+        
+        
+ 
+        cnt++;
+    }
+ 
+    
+    if (cnt != N) {
+        cout<<-1;
+        return 0;
+    }
+ 
+  
+    for (int i = 0; i < order.size(); i++)
+        cout << order[i]+1 << " ";
+    
+    
     return 0;
 }
