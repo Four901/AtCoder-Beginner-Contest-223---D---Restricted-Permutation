@@ -1,72 +1,24 @@
-class Bank {
+class Solution {
 public:
-    vector<long long>bal;
-    long long n;
-    Bank(vector<long long>& balance)
+    void okk(int index,int tempor,vector<int>&nums,int &ans,int &maxor)
     {
-        this->bal=balance;
-        this->n=balance.size();
+        if(index>=nums.size())
+        {
+            if(tempor==maxor)ans++;
+            return ;
+        }
+        okk(index+1,tempor,nums,ans,maxor);
+        okk(index+1,(tempor | nums[index]),nums,ans,maxor);
     }
-    
-    bool transfer(int account1, int account2, long long money) 
+    int countMaxOrSubsets(vector<int>& nums)
     {
-         if(account1>=1&&account1<=n&&account2>=1&&account2<=n)
-        {
-           if(bal[account1-1]>=money)
-           {
-               bal[account1-1]-=money;
-               bal[account2-1]+=money;
-               return true;
-           }
-            else
-            {
-                return false;
-            }
-        }
-        else
-        {
-            return false;
-        }
-    }
-    
-    bool deposit(int account, long long money)
-    {
-        if(account>=1&&account<=n)
-        {
-            bal[account-1]+=money;
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-    
-    bool withdraw(int account, long long money) 
-    {
-        if(account>=1&&account<=n)
-        {
-           if(bal[account-1]>=money)
-           {
-               bal[account-1]-=money;
-               return true;
-           }
-            else
-            {
-                return false;
-            }
-        }
-        else
-        {
-            return false;
-        }
+     int maxor=0;
+     for(auto num:nums)
+     {
+         maxor=(maxor | num);
+     }
+       int ans=0;
+      okk(0,0,nums,ans,maxor);
+        return ans;
     }
 };
-
-/**
- * Your Bank object will be instantiated and called as such:
- * Bank* obj = new Bank(balance);
- * bool param_1 = obj->transfer(account1,account2,money);
- * bool param_2 = obj->deposit(account,money);
- * bool param_3 = obj->withdraw(account,money);
- */
