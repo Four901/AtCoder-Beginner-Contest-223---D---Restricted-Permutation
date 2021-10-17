@@ -1,14 +1,32 @@
 class Solution {
 public:
-    int minMovesToSeat(vector<int>& seats, vector<int>& students)
+    bool winnerOfGame(string colors)
     {
-      sort(seats.begin(),seats.end());
-      sort(students.begin(),students.end());
-      int ans=0;
-      for(int i=0;i<seats.size();i++)
-      {
-          ans+=abs(seats[i]-students[i]);
-      }
-        return ans;
+        int a=0;
+        int b=0;
+        for(int i=0;i<colors.size();)
+        {
+            char ch=colors[i];
+            int count=0;
+            while(i<colors.size())
+            {
+                if(colors[i]!=ch)break;
+                i++;
+                count++;
+            }
+            if(count>=3)
+            {
+                if(ch=='A')
+                {
+                    
+                 a+=count-2;
+                }
+                else
+                {
+                    b+=count-2;
+                }
+            }
+        }
+        return a>b;
     }
 };
